@@ -43,7 +43,7 @@ function validateLoginForm() {
     return isValid;
 }
 
-function logIn() {
+async function logIn() {
     if (!validateLoginForm()) {
         return;
     }
@@ -53,4 +53,55 @@ function logIn() {
 
     console.log("Login Email:", email);
     console.log("Login Password:", password);
+
+    try {
+        const response = await apiRequest("POST", "https://localhost:7096/api/Auth/login", { email, password });
+        const token = extractToken(response);
+
+        console.log("Login API Response:", response);
+
+        if (!token) {
+            throw new Error("Login succeeded but token was not found. Check API response format.");
+        }
+
+        ApiClient.setToken(token);
+        window.location.assign("/Product/AllProducts");
+    } catch (error) {
+        console.error("Login error:", error);
+        $("#passwordError").text(error.message || "Login failed");
+    }
+}
+
+function extractToken(response) {
+    if (!response) {
+        return "";
+    }
+
+    if (typeof response === "string") {
+        return response;
+    }
+
+    const directToken =
+        response.token ||
+        response.Token ||
+        response.accessToken ||
+        response.AccessToken ||
+        response.jwtToken ||
+        response.JwtToken;
+
+    if (directToken) {
+        return directToken;
+    }
+
+    if (response.data && typeof response.data === "object") {
+        return (
+            response.data.token ||
+            response.data.Token ||
+            response.data.accessToken ||
+            response.data.AccessToken ||
+            ""
+        );
+    }
+
+    return "";
 }

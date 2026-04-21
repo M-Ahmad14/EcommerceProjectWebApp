@@ -1,6 +1,22 @@
 ﻿(function () {
+    const TOKEN_STORAGE_KEY = "authToken";
     const loaderElement = document.getElementById("globalLoader");
     let pendingLoaderCount = 0;
+
+    function getAuthToken() {
+        return localStorage.getItem(TOKEN_STORAGE_KEY) || "";
+    }
+
+    function setAuthToken(token) {
+        if (!token) {
+            return;
+        }
+        localStorage.setItem(TOKEN_STORAGE_KEY, token);
+    }
+
+    function clearAuthToken() {
+        localStorage.removeItem(TOKEN_STORAGE_KEY);
+    }
 
     function showLoader() {
         if (!loaderElement) {
@@ -32,6 +48,10 @@
             "Content-Type": "application/json",
             ...(options.headers || {})
         };
+        const token = getAuthToken();
+        if (token && !headers.Authorization) {
+            headers.Authorization = "Bearer " + token;
+        }
 
         const requestOptions = {
             method: requestMethod,
@@ -118,7 +138,10 @@
         },
         delete: function (url, options = {}) {
             return apiRequest("DELETE", url, null, options);
-        }
+        },
+        getToken: getAuthToken,
+        setToken: setAuthToken,
+        clearToken: clearAuthToken
     };
 
     window.apiRequest = apiRequest;

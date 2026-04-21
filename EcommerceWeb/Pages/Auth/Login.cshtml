@@ -21,7 +21,7 @@
                 <small class="text-danger" id="passwordError"></small>
             </div>
 
-            <button type="submit" onclick="logIn()" class="btn btn-primary w-100">Login</button>
+            <button type="submit" class="btn btn-primary w-100">Login</button>
 
             <div class="auth-link">
                 Don't have an account? <a asp-page="/Auth/Register">Register</a>
@@ -30,4 +30,6 @@
     </div>
 </div>
 
-<script src="~/Auth/login.js"></script>
+@section Scripts {
+    <script src="~/Auth/login.js" asp-append-version="true"></script>
+}

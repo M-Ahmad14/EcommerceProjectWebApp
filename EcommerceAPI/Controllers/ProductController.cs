@@ -22,7 +22,7 @@ namespace EcommerceAPI.Controllers
         }
 
         //GET ALL PRODUCTS
-        //[Authorize]
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
