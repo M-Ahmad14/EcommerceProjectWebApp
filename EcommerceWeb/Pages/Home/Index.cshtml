@@ -1,0 +1,39 @@
+﻿@page
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<section class="welcome-hero">
+    <div class="welcome-hero__content">
+        <span class="welcome-badge">Welcome to EcommerceWeb</span>
+        <h1>Discover great products with a smooth shopping experience</h1>
+        <p>
+            Browse categories, explore top picks, and manage your account in one clean and fast storefront.
+        </p>
+        <div class="welcome-actions">
+            <a class="btn btn-primary btn-lg" href="#">Shop Now</a>
+            <a class="btn btn-outline-light btn-lg" asp-page="/Auth/Register">Create Account</a>
+        </div>
+    </div>
+</section>
+
+<section class="welcome-features">
+    <div class="feature-card">
+        <h3>Curated Products</h3>
+        <p>Handpicked collections to help customers find quality items quickly.</p>
+    </div>
+    <div class="feature-card">
+        <h3>Fast Navigation</h3>
+        <p>Simple menus and clear pages for a seamless browsing journey.</p>
+    </div>
+    <div class="feature-card">
+        <h3>Secure Accounts</h3>
+        <p>Easy registration and login flow ready for your authentication logic.</p>
+    </div>
+</section>
+
+<section class="welcome-cta">
+    <h2>Ready to start shopping?</h2>
+    <p>Sign in to continue or create a new account in less than a minute.</p>
+    <a class="btn btn-dark" asp-page="/Auth/Login">Go to Login</a>
+</section>

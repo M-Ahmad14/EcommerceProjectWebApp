@@ -1,0 +1,33 @@
+﻿@page
+@model EcommerceWeb.Pages.Auth.LoginModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="auth-page">
+    <div class="auth-card auth-card-sm">
+        <h2 class="mb-4 text-center">Login</h2>
+
+        <form id="loginForm">
+            <div class="mb-3">
+                <label class="form-label">Email Address</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter email" />
+                <small class="text-danger" id="emailError"></small>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Enter password" />
+                <small class="text-danger" id="passwordError"></small>
+            </div>
+
+            <button type="submit" onclick="logIn()" class="btn btn-primary w-100">Login</button>
+
+            <div class="auth-link">
+                Don't have an account? <a asp-page="/Auth/Register">Register</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="~/Auth/login.js"></script>
